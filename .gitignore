@@ -15,3 +15,4 @@ solution/*.out
 solution/*.in
 solution/*.ans
 solution/*.test
+*.DS_Store
