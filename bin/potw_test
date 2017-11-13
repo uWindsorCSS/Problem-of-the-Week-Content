@@ -28,7 +28,9 @@ for i in range(len(tests)):
     expected = open(answers[i]).read()
     if output.strip() != expected.strip() and not skip_verification:
         print "Failed"
-
+        print "> Your output: " + output.strip()
+        print "> Correct output: " + expected.strip()
+    
         d = Differ()
         diff = list(d.compare(output.strip().splitlines(1),
             expected.strip().splitlines(1)))
