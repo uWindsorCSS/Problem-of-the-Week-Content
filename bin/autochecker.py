@@ -104,15 +104,10 @@ def rust_handler(source):
     return ["./a.out"]
 
 def go_handler(source):
-    ret = subprocess.call(["go", "tool", "compile", "-o", "main.o", source])
+    ret = subprocess.call(["go", "build", "-o", "a.out", source])
     if ret != 0:
         print "Error compiling " + source
         sys.exit(1)
-    ret = subprocess.call(["go", "tool", "link", "-o", "a.out", "main.o"])
-    if ret != 0:
-        print "Error linking " + source
-        sys.exit(1)
-    subprocess.call(["rm", "main.o"])
     return ["./a.out"]
 
 def php_handler(source):
