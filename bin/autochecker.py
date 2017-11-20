@@ -117,7 +117,11 @@ def moon_handler(source):
     return ["moon", source]
 
 def swift_handler(source):
-    return ["swift", source]
+    ret = subprocess.call(["swiftc", source, "-o", "a.out"])
+    if ret != 0:
+        print "Error compiling " + source
+        sys.exit(1)
+    return ["./a.out"]
 
 # Given a source file, perform compile operations and
 # get the run command back
