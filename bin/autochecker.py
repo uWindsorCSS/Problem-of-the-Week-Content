@@ -97,7 +97,7 @@ def c_handler(source):
     return ["./a.out"]
 
 def rust_handler(source):
-    ret = subprocess.call(["rustc", source, "-o", "a.out", "-O"])
+    ret = subprocess.call(["rustc", source, "-o", "a.out", "-C", "opt-level=3"])
     if ret != 0:
         print "Error compiling " + source
         sys.exit(1)
