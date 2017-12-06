@@ -15,6 +15,9 @@ run_command = autochecker.run_command(sys.argv[1])
 skip_verification = sys.argv[2] == "nocheck" if len(sys.argv) == 3 else False
 total_run_time = timedelta()
 
+fail_flag = False
+fail_count = 0
+
 for i in range(len(tests)):
     print "running test " + str(i) + "/" + str(len(tests))
     if skip_verification:
@@ -28,15 +31,21 @@ for i in range(len(tests)):
     expected = open(answers[i]).read()
     if output.strip() != expected.strip() and not skip_verification:
         print "Failed"
-        print "> Your output: " + output.strip()
-        print "> Correct output: " + expected.strip()
-    
-        d = Differ()
-        diff = list(d.compare(output.strip().splitlines(1),
-            expected.strip().splitlines(1)))
-        print "".join(diff)
+        print "> Your output: \n" + output.strip()
+        print "> Correct output: \n" + expected.strip()
+        
+        fail_flag = True
+        fail_count += 1
 
-        sys.exit(1)
+        #d = Differ()
+        #diff = list(d.compare(output.strip().splitlines(1),
+        #    expected.strip().splitlines(1)))
+        #print "".join(diff)
 
-print "Passed!"
-print "Total runtime in seconds: " + str(total_run_time.total_seconds())
+        #sys.exit(1)
+
+if fail_flag:
+    print "Failed " + str(fail_count) + " test case(s)"
+else:
+    print "Passed!"
+    print "Total runtime in seconds: " + str(total_run_time.total_seconds())
