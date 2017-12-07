@@ -51,7 +51,8 @@ and then return an array of the commands needed to execute
 '''
 
 def cpp_handler(source):
-    ret = subprocess.call(["g++", "-std=c++1y", "-O3", source])
+    # Note: Using g++-7 alias to run GCC 7.2.0, may need to change for your system
+    ret = subprocess.call(["g++-7", "-std=c++14", "-O3", source])
     if ret != 0:
         print "Error compiling " + source
         sys.exit(1)
